@@ -7,6 +7,9 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
+const busboy = require('connect-busboy');
+const busboyBodyParser = require('busboy-body-parser');
+
 const config = require('../config/config');
 const webpackConfig = require('../webpack.config');
 
@@ -24,6 +27,8 @@ const port  = process.env.PORT || 8080;
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(busboy());
+app.use(busboyBodyParser());
 
 // API routes
 require('./routes')(app);
@@ -63,7 +68,7 @@ app.listen(port, '0.0.0.0', (err) => {
     console.log(err);
   }
 
-  console.info('>>> 🌎 Open http://0.0.0.0:%s/ in your browser.', port);
+  console.info('>>> Server is ready, open localhost:%s/ in your browser.', port);
 });
 
 module.exports = app;
