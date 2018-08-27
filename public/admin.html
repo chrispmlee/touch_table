@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+    <script src="https://angular-file-upload.appspot.com/js/ng-file-upload.js"></script>
+    <script src="https://angular-file-upload.appspot.com/js/ng-file-upload-shim.js"></script>
+
+    <!-- <link rel="stylesheet" href="css/new_post.css"> -->
+    <script src="js/admin.js"></script>
+</head>
+
+
+<body ng-app="fileUpload" ng-controller="MyCtrl">
+<form name="myForm">
+        <legend>This is the admin upload page</legend>
+
+        <br>Title
+        <input name="title" id="title" ng-model="title" placeholder="Title" required>
+        <i ng-show="myForm.title.$error.required">*required</i>
+
+        <br>Purpose
+        <input name="purpose" id="purpose" ng-model="purpose" placeholder="Short line on what the purpose of the project is" required>
+        <i ng-show="myForm.purpose.$error.required">*required</i>
+        
+        <br>Description
+        <input name="description" id="description" ng-model="description" placeholder="Long description goes here" required>
+        <i ng-show="myForm.description.$error.required">*required</i>
+
+        <br>Medical Center
+        <input name="medcenter" id="medcenter" ng-model="medcenter" placeholder="Which medcenter do you work with?" required>
+        <i ng-show="myForm.medcenter.$error.required">*required</i>
+
+        <br>Team members
+        <input name="team" id="team" ng-model="team" placeholder="Who is on the team?" required>
+        <i ng-show="myForm.team.$error.required">*required</i>
+
+        <br>Photo:
+        <input type="file" ngf-select ng-model="picFile" name="file"
+               accept="image/*"  required
+               ngf-model-invalid="errorFile">
+        <i ng-show="myForm.file.$error.required">*required</i><br>
+        <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+        <br>
+    
+        <button ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile)">Submit</button>
+</form>
+</body>
+
+
+</html>
